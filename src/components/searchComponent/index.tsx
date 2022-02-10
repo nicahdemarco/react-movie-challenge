@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import "./searchComp.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { findMoviesBySearch, API_KEY, parsedError } from '../../fetchService/fetchService';
 import { IMovieCard } from "../../types/types";
+import { LoadingComponent } from "../loadingComponent";
 
 type SearchCompType = { setSearchResponseState: (param: IMovieCard[]) => void };
 
@@ -15,7 +16,7 @@ export const SearchComp = ({ setSearchResponseState }: SearchCompType): JSX.Elem
 			.catch((err) => parsedError(err));
 	};
 
-	return (
+	return <Suspense fallback={<LoadingComponent message={'Loading movies'} />}>
 		<>
 			<div className="search-comp">
 				<input
@@ -46,5 +47,5 @@ export const SearchComp = ({ setSearchResponseState }: SearchCompType): JSX.Elem
 
 			</div >
 		</>
-	);
+	</Suspense>
 };
