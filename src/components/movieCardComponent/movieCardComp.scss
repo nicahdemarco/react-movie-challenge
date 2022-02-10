@@ -1,7 +1,6 @@
 .poster {
     display: flex;
     position: relative;
-
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -42,12 +41,16 @@
 
             .rate {
                 display: flex;
+                height: 24px;
+                min-width: 24px;
                 border-radius: 5px;
                 background-color: #191926;
-                padding: 2%;
-                font-size: 1ch;
+                padding: 4px;
+                line-height: 15px;
+                font-size: 12px;
+                font-weight: bold;
                 justify-content: center;
-                align-items: center;
+                box-sizing: border-box;
             }
             .fav-btn {
                 color: #ff3365;
@@ -66,7 +69,6 @@
             .stars-container {
                 margin-right: 4px;
                 align-items: baseline;
-
             }
         }
         .card-footer {
