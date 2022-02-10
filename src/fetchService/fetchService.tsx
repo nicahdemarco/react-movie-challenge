@@ -1,88 +1,42 @@
-import { IMovieCard } from "../components/movieCardComponent";
-export const RAPID_API_KEY = "1c7220d1c7msh77c51344fae2ac5p166df8jsnc5b5b24fd4cd";
+import { IRawData } from "../types/types";
+export const API_KEY = "66e6c4190fa8095b70e61bda4702a19f";
 
 /**
- * Get a list of IDs of popular Movies 
- * @param RAPID_API_KEY ApiKey required to validate the request
- * @returns An array of movie IDs
+ * Get a list of the current popular Movies 
+ * @param API_KEY ApiKey required to validate the request
+ * @returns An object with an array of movies
  */
-export const getPopularMovies = (RAPID_API_KEY: string): Promise<string[]> => {
-    const URL_REQUEST = "https://imdb8.p.rapidapi.com/title/get-most-popular-movies?homeCountry=US&purchaseCountry=US&currentCountry=US";
-
-    return fetch(URL_REQUEST, {
-        "method": "GET",
-        "headers": {
-            "x-rapidapi-host": "imdb8.p.rapidapi.com",
-            "x-rapidapi-key": `${RAPID_API_KEY}`
-        }
-    })
+export const getPopularMovies = (API_KEY: string): Promise<IRawData> => {
+    const URL_REQUEST = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=true&page=1`;
+    return fetch(URL_REQUEST)
         .then((dbRes: Response) => dbRes.json())
         .catch((err: Error) => parsedError(err));
 }
 
 /**
- * Get detail information of the title
- * @param RAPID_API_KEY ApiKey required to validate the request
+ * Get detailed information on a particular title
+ * @param API_KEY ApiKey required to validate the request
  * @param MOVIE_ID Id of a particular movie
- * @returns A movie object
+ * @returns A detailed movie object
  */
-export const getMovieDetails = (RAPID_API_KEY: string, MOVIE_ID: string): Promise<IMovieCard> => {
-    const URL_REQUEST = `https://imdb8.p.rapidapi.com/title/get-details?tconst=${MOVIE_ID}`;
-
-    return fetch(URL_REQUEST, {
-        "method": "GET",
-        "headers": {
-            "x-rapidapi-host": "imdb8.p.rapidapi.com",
-            "x-rapidapi-key": `${RAPID_API_KEY}`
-        }
-    })
-        .then((dbRes: Response) => {
-            return dbRes.json()
-                .then((movie) => movie);
-        })
-        .catch((err: Error) => parsedError(err));
-}
-
-/**
- * Get brief information of movies by their id
- * @param RAPID_API_KEY ApiKey required to validate the request
- * @param ID_LIST List of ids
- * @returns A movie/s object
- */
-export const getMovieDataById = (RAPID_API_KEY: string, ID_LIST: string): Promise<IMovieCard> => {
-    const URL_REQUEST = `https://imdb8.p.rapidapi.com/title/get-meta-data?${ID_LIST}&region=US`;
-
-    return fetch(URL_REQUEST, {
-        "method": "GET",
-        "headers": {
-            "x-rapidapi-host": "imdb8.p.rapidapi.com",
-            "x-rapidapi-key": `${RAPID_API_KEY}`
-        }
-    })
+export const getMovieDetails = (API_KEY: string, MOVIE_ID: string): Promise<IRawData> => {
+    const URL_REQUEST = `https://api.themoviedb.org/3/movie/${MOVIE_ID}?api_key=${API_KEY}&language=en-US`;
+    return fetch(URL_REQUEST)
         .then((dbRes: Response) => dbRes.json())
         .catch((err: Error) => parsedError(err));
 }
 
 /**
  * Find title by whatever you are familiar with, such as : name of title
- * @param RAPID_API_KEY ApiKey required to validate the request
+ * @param API_KEY ApiKey required to validate the request
  * @param USER_QUERY The query that the user input to search
  * @returns An array of results objects
  */
-export const findMoviesBySearch = (RAPID_API_KEY: string, USER_QUERY: string): Promise<any> => {
-    const URL_REQUEST = `https://imdb8.p.rapidapi.com/title/find?q=${USER_QUERY}`;
+export const findMoviesBySearch = (API_KEY: string, USER_QUERY: string): Promise<IRawData> => {
+    const URL_REQUEST = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${USER_QUERY}&language=en-US&page=1&include_adult=false`;
 
-    return fetch(URL_REQUEST, {
-        "method": "GET",
-        "headers": {
-            "x-rapidapi-host": "imdb8.p.rapidapi.com",
-            "x-rapidapi-key": `${RAPID_API_KEY}`
-        }
-    })
-        .then((dbRes: Response) => {
-            return dbRes.json()
-                .then((resultsData) => resultsData);
-        })
+    return fetch(URL_REQUEST)
+        .then((dbRes: Response) => dbRes.json())
         .catch((err: Error) => parsedError(err));
 }
 
