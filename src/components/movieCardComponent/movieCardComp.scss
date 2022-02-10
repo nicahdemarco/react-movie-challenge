@@ -1,0 +1,110 @@
+.poster {
+    display: flex;
+    position: relative;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 300px;
+    width: 200px;
+    border: 0.5px solid rgba(255, 255, 255, 0.5);
+    border-radius: 8px;
+    margin: 8px;
+    animation: fade-in 1s ease-in;
+    color: #ffffff;
+
+    .poster-overlay {
+        background: linear-gradient(to bottom, rgba(25, 25, 38, 0) 0%, rgba(25, 25, 38, 1) 80%);
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        top: 0;
+        left: 0;
+        border-radius: 8px;
+        z-index: 2;
+    }
+    .poster-not-found {
+        background-image: url("../../assets/no-poster.png");
+    }
+
+    .poster-data {
+        z-index: 3;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 5%;
+        flex-grow: 1;
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+
+            .rate {
+                display: flex;
+                border-radius: 5px;
+                background-color: #191926;
+                padding: 2%;
+                font-size: 1ch;
+                justify-content: center;
+                align-items: center;
+            }
+            .fav-btn {
+                color: #ff3365;
+                background: transparent;
+            }
+        }
+        .card-main {
+            display: flex;
+            align-items: flex-end;
+            height: 100%;
+            font-size: 1ch;
+            margin-right: 8px;
+            font-weight: bold;
+            line-height: 12px;
+            color: #565665;
+            .stars-container {
+                margin-right: 4px;
+                align-items: baseline;
+
+            }
+        }
+        .card-footer {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            .card-footer-title {
+                font-size: 14px;
+                font-weight: bold;
+                line-height: 20px;
+                color: #ececec;
+                margin-bottom: 2px;
+            }
+
+            .card-footer-duration {
+                font-size: 1ch;
+                margin: 0;
+                font-weight: bold;
+                line-height: 12px;
+                color: #565665;
+            }
+        }
+    }
+
+    .poster-data:hover {
+        cursor: pointer;
+        border-radius: 8px;
+        background-color: rgba(0, 0, 0, 0.2);
+    }
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        transition: opacity;
+    }
+    to {
+        opacity: 1;
+        transition: opacity;
+    }
+}
