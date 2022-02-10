@@ -1,13 +1,34 @@
-
+export interface IRawData {
+	results: IMovieCard[];
+}
 export interface IMovieCard {
+
 	id: number;
 	title: string;
-	plot: string;
-	genres: string[];
+	popularity: number;
 	poster_path: string;
-	imdb_rating: string;
-	release_date?: string;
-	rated: string;
-	stars: string[];
-	runningTimeInMinutes: number
+	vote_average: number;
+	overview: string;
+	release_date: string;
+	adult: boolean,
+	backdrop_path: string;
+	genre_ids: string[]
+	original_language: string;
+	original_title: string;
+	video: false;
+	vote_count: number;
+}
+export interface IMovieDetails extends IMovieCard {
+	budget: number
+	genres: [
+		{
+			id: number,
+			name: string,
+		}
+	]
+	homepage: string;
+	imdb_id?: string;
+	runtime: number;
+	tagline?: string;
+
 }
