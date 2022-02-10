@@ -1,4 +1,4 @@
-import { IRawData } from "../types/types";
+import { IMovieDetails, IRawData } from "../types/types";
 export const API_KEY = "66e6c4190fa8095b70e61bda4702a19f";
 
 /**
@@ -19,7 +19,7 @@ export const getPopularMovies = (API_KEY: string): Promise<IRawData> => {
  * @param MOVIE_ID Id of a particular movie
  * @returns A detailed movie object
  */
-export const getMovieDetails = (API_KEY: string, MOVIE_ID: string): Promise<IRawData> => {
+export const getMovieDetails = (API_KEY: string, MOVIE_ID: number): Promise<IMovieDetails> => {
     const URL_REQUEST = `https://api.themoviedb.org/3/movie/${MOVIE_ID}?api_key=${API_KEY}&language=en-US`;
     return fetch(URL_REQUEST)
         .then((dbRes: Response) => dbRes.json())
