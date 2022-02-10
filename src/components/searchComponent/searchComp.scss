@@ -1,0 +1,31 @@
+.search-comp {
+    display: flex;
+    padding: 8px 16px;
+    min-width: 40%;
+    border: 1px solid #717187;
+    border-radius: 32px;
+    background-color: rgba(241, 241, 241, 0.05);
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0 4% 3% 4%;
+    input {
+        width: 100%;
+        height: 30px;
+        text-decoration-style: none;
+        background-color: transparent;
+        font-size: 1rem;
+        font-style: italic;
+        outline: none;
+        border: none;
+        color: #ffffff;
+
+        .icon {
+            color: #717187;
+            margin: 0 10px;
+
+            .clear-icon {
+                cursor: pointer !important;
+            }
+        }
+    }
+}
