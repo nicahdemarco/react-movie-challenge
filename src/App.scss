@@ -1,0 +1,11 @@
+.app-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+  background: rgb(25, 25, 38);
+  background: radial-gradient(circle, rgba(25, 25, 38, 1) 0%, rgba(25, 25, 38, 0.95) 10%, rgba(25, 25, 38, 1) 100%);
+  background: -webkit-radial-gradientrgba((25, 25, 38, 1) 0%, rgba(25, 25, 38, 0.95) 10%, rgba(25, 25, 38, 1) 100%);
+  background: -moz-radial-gradient(rgba(25, 25, 38, 1) 0%, rgba(25, 25, 38, 0.95) 10%, rgba(25, 25, 38, 1) 100%);
+}
+
