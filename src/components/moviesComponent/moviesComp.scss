@@ -1,0 +1,37 @@
+.movies-comp {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    margin: 5% 25%;
+
+    .title-container {
+        cursor: pointer;
+        display: flex;
+        flex-wrap: wrap-reverse;
+        justify-content: space-between;
+        margin-bottom: 1%;
+    }
+
+    .title {
+        padding: 1%;
+        margin-left: 0.5%;
+        background-color: rgb(241, 241, 241, 0.8);
+        box-shadow: 8px 8px 1px rgba(27, 29, 29, 0.7);
+    }
+
+    .title:active {
+        transform: scale(90%);
+        box-shadow: 5px 5px 0.5px rgba(27, 29, 29, 1);
+    }
+
+    .card-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .title-container > h3 :nth-child(1) {
+        margin-right: 5px;
+    }
+}
