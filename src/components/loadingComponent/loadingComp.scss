@@ -1,0 +1,38 @@
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    background-color: red;
+    .loading-text {
+        text-align: center;
+        font-size: 1.5em;
+        margin: 0;
+    }
+
+    .loading-logo {
+        height: 150px;
+        width: 150px;
+        margin: 0;
+        pointer-events: none;
+        background-image: url("../../assets/logo.svg");
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+}
+
+@keyframes loading-logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .loading-logo {
+        animation: loading-logo-spin infinite 5s linear;
+    }
+}
