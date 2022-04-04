@@ -1,12 +1,14 @@
-import React, { useState, Suspense } from "react";
+import React, { useState, Suspense, useEffect } from "react";
 import { MovieCardComp } from "../movieCardComponent";
 import { LoadingComponent } from "../loadingComponent";
 import { SearchComp } from "../searchComponent";
-import { IMovieCard } from "../../types/types";
+import { IMovieCard, IMovieDetails } from "../../types/types";
+import { getMovieDetails, API_KEY, parsedError } from "../../fetchService/fetchService";
 import "./moviesComp.scss";
 
 export const MoviesComp = ({ movieResults }: { movieResults: IMovieCard[] }): JSX.Element => {
 	const [searchResponseState, setSearchResponseState] = useState<IMovieCard[]>([]);
+	const [complementaryMovieData, setComplementaryMovieData] = useState<IMovieDetails[]>();
 
 	let filteredList: IMovieCard[];
 
@@ -17,6 +19,29 @@ export const MoviesComp = ({ movieResults }: { movieResults: IMovieCard[] }): JS
 
 		return filteredList;
 	});
+	console.log(filteredList); //Esto tiene data correcta 
+
+	useEffect(() => {
+		const detailedMovies: IMovieDetails[] = [];
+		if (!movieResults) return;
+
+		movieResults &&
+			filteredList.map((filteredMovie) => {
+				return getMovieDetails(API_KEY, filteredMovie.id)
+					.then((data) => {
+						debugger
+						data && detailedMovies.push(data)
+						console.log(detailedMovies);
+
+					})
+					.catch((err) => parsedError(err))
+					.finally( () => setComplementaryMovieData(detailedMovies));
+				// return detailedMovies;
+			});
+
+	}, [movieResults, filteredList])
+
+
 
 	return <Suspense fallback={<LoadingComponent message={'Loading movies'} />}>
 
@@ -27,14 +52,14 @@ export const MoviesComp = ({ movieResults }: { movieResults: IMovieCard[] }): JS
 						setSearchResponseState={setSearchResponseState}
 					/>
 				</div>
-				{/* Popular movie list */}
 
+				{/* Popular movie list */}
 				<Suspense fallback={<LoadingComponent message={'Loading Popular movies'} />}>
 					<div className='card-container'>
 						{
 							!searchResponseState.length &&
-								filteredList !== undefined ?
-								filteredList.map((singleMovie: IMovieCard, key: React.Key | null | undefined) => {
+								complementaryMovieData !== undefined ?
+								complementaryMovieData.map((singleMovie: IMovieDetails, key: React.Key | null | undefined) => {
 
 									if (singleMovie) {
 										return < MovieCardComp
@@ -51,19 +76,20 @@ export const MoviesComp = ({ movieResults }: { movieResults: IMovieCard[] }): JS
 				</Suspense>
 
 				{/* Search result movie list */}
-				<Suspense fallback={<LoadingComponent message={'searching movie'} />}>
+				{/* <Suspense fallback={<LoadingComponent message={'searching movie'} />}>
 					<div className='card-container'>
 						{
 							searchResponseState.length > 0 ?
-								searchResponseState.map((movie: IMovieCard, key: React.Key | null | undefined) => {
+								searchResponseState.map((movie: IMovieDetails, key: React.Key | null | undefined) => {
 									return <MovieCardComp movie={movie} key={key} />
 								})
 								: null
 						}
 					</div>
-				</Suspense>
+				</Suspense> */}
 			</div >
 		</>
 	</Suspense>
+
 
 };

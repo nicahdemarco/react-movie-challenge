@@ -1,0 +1,124 @@
+.modal-title {
+    margin: 0;
+    letter-spacing: 2px;
+}
+
+.back-btn {
+    height: 24px;
+    width: 24px;
+    background-color: red;
+}
+
+.no-scroll {
+    overflow: hidden;
+}
+
+.icon {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    stroke-width: 0;
+    stroke: currentColor;
+    fill: currentColor;
+}
+
+.card__background {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+
+    height: 380px;
+    z-index: -1;
+    text-align: left;
+}
+.card__background.poster-not-found {
+    background-image: url("../../assets/no-poster.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.card__background::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(to top, #fff 0, rgba(255, 255, 255, 0) 65%);
+}
+
+.modal-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    display: flex;
+    background: rgba(0, 0, 0, 0.5);
+    transition: opacity 150ms ease;
+}
+
+.modal-container {
+    overflow: hidden;
+    position: relative;
+    margin: auto;
+    width: 90vw;
+    height: 80vh;
+    max-width: 500px;
+    background: #fff;
+    box-shadow: 10px 10px 1px rgba(27, 29, 29, 0.8);
+    animation: show-up 0.5s ease-in-out;
+}
+
+.modal__scroll-area {
+    height: inherit;
+    overflow: auto;
+    border-radius: inherit;
+    position: relative;
+    z-index: 1;
+}
+
+.modal__close-button {
+    background: transparent;
+    border: none;
+    margin-bottom: auto;
+    background-color: rgb(241, 241, 241, 0.8);
+    box-shadow: 10px 10px 1px rgba(27, 29, 29, 0.8);
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 2em;
+    z-index: 2;
+    cursor: pointer;
+}
+
+.modal-header {
+    text-align: center;
+    position: relative;
+    display: flex;
+    padding: 0.5em;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    min-height: 350px;
+    z-index: 1;
+}
+
+.modal__content {
+    padding: 2em;
+    color: #666;
+    line-height: 1.5;
+}
+
+@keyframes show-up {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
