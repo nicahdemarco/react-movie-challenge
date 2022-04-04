@@ -21,6 +21,8 @@ export const getPopularMovies = (API_KEY: string): Promise<IRawData> => {
  */
 export const getMovieDetails = (API_KEY: string, MOVIE_ID: number): Promise<IMovieDetails> => {
     const URL_REQUEST = `https://api.themoviedb.org/3/movie/${MOVIE_ID}?api_key=${API_KEY}&language=en-US`;
+    // https://api.themoviedb.org/3/list/{list_id}?api_key=<<api_key>>&language=en-US
+
     return fetch(URL_REQUEST)
         .then((dbRes: Response) => dbRes.json())
         .catch((err: Error) => parsedError(err));

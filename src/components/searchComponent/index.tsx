@@ -34,6 +34,7 @@ export const SearchComp = ({ setSearchResponseState }: SearchCompType): JSX.Elem
 							color="#717187"
 							fontSize={"8px"}
 							icon="times"
+							cursor='pointer'
 							onClick={() => { setInputValue(''); setSearchResponseState([]) }}
 						/>
 						: <FontAwesomeIcon

@@ -24,9 +24,6 @@
         border-radius: 8px;
         z-index: 2;
     }
-    .poster-not-found {
-        background-image: url("../../assets/no-poster.png");
-    }
 
     .poster-data {
         z-index: 3;
@@ -98,6 +95,9 @@
         border-radius: 8px;
         background-color: rgba(0, 0, 0, 0.2);
     }
+}
+.poster-not-found {
+    background-image: url("../../assets/no-poster.png") ;
 }
 
 @keyframes fade-in {

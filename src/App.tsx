@@ -21,10 +21,10 @@ function App() {
 
 	return (
 		<div className="app-container">
-			{appState ?
+			{appState &&
 				<MoviesComp
 					movieResults={appState.results}
-				/> : null
+				/>
 			}
 		</div>
 	);

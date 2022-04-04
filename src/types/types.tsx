@@ -11,7 +11,7 @@ export interface IMovieCard {
 	overview: string;
 	release_date: string;
 	adult: boolean,
-	backdrop_path: string;
+	backdrop_path: string | undefined;
 	genre_ids: string[]
 	original_language: string;
 	original_title: string;
