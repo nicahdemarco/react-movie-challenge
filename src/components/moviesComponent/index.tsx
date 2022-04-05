@@ -9,37 +9,24 @@ import "./moviesComp.scss";
 export const MoviesComp = ({ movieResults }: { movieResults: IMovieCard[] }): JSX.Element => {
 	const [searchResponseState, setSearchResponseState] = useState<IMovieCard[]>([]);
 	const [complementaryMovieData, setComplementaryMovieData] = useState<IMovieDetails[]>();
-
-	let filteredList: IMovieCard[];
-
-	filteredList = movieResults && movieResults.filter((movie: IMovieCard) => {
-		if (movieResults.indexOf(movie) < 10) {
-			return movie;
-		}
-
-		return filteredList;
-	});
-	console.log(filteredList); //Esto tiene data correcta 
+	// console.log(movieResults);
 
 	useEffect(() => {
 		const detailedMovies: IMovieDetails[] = [];
 		if (!movieResults) return;
 
 		movieResults &&
-			filteredList.map((filteredMovie) => {
-				return getMovieDetails(API_KEY, filteredMovie.id)
+			movieResults.map((movieResults) => {
+				return getMovieDetails(API_KEY, movieResults.id)
 					.then((data) => {
-						debugger
 						data && detailedMovies.push(data)
-						console.log(detailedMovies);
 
+						return setComplementaryMovieData(detailedMovies);
 					})
 					.catch((err) => parsedError(err))
-					.finally( () => setComplementaryMovieData(detailedMovies));
-				// return detailedMovies;
 			});
 
-	}, [movieResults, filteredList])
+	}, [movieResults])
 
 
 

@@ -2,7 +2,7 @@ import React, { Suspense } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { MovieDetailComp } from "../movieDetailsComponent";
 import ReactStars from 'react-stars';
-import { IMovieCard, IMovieDetails } from "../../types/types";
+import { IMovieDetails } from "../../types/types";
 import { LoadingComponent } from "../loadingComponent";
 import "./movieCardComp.scss";
 

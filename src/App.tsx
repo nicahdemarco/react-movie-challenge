@@ -6,29 +6,41 @@ import { fab } from '@fortawesome/free-brands-svg-icons';
 import { faArrowLeft, faHeart, faSearch, faStar, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { getPopularMovies } from './fetchService/fetchService';
 import { API_KEY, parsedError } from './fetchService/fetchService';
-import { IRawData } from "./types/types";
+import { IMovieCard } from "./types/types";
 
 library.add(fab, faArrowLeft, faHeart, faSearch, faStar, faTimes)
 
 function App() {
-	const [appState, setAppState] = useState<IRawData>();
+	const [fetchResult, setFetchResult] = useState<IMovieCard[]>();
 
 	useEffect(() => {
-		!appState && getPopularMovies(API_KEY)
-			.then((data) => setAppState(data))
-			.catch((err) => parsedError(err))
-	}, [appState]);
+		const filteredMovieList: IMovieCard[] = [];
+
+		!fetchResult &&
+			getPopularMovies(API_KEY)
+				.then((data) => {
+					data &&
+						data.results.filter((movie: IMovieCard) => {
+							if (data.results.indexOf(movie) < 10) return movie;
+
+							return filteredMovieList.push(movie);
+						});
+
+					return setFetchResult(filteredMovieList);
+				})
+				.catch((err) => parsedError(err))
+
+	}, [fetchResult]);
 
 	return (
 		<div className="app-container">
-			{appState &&
+			{fetchResult &&
 				<MoviesComp
-					movieResults={appState.results}
+					movieResults={fetchResult}
 				/>
 			}
 		</div>
 	);
 }
-
 
 export default App;
